@@ -1,4 +1,4 @@
-package com.tuto.taffmediator;
+package com.tuto.taffmediator.data;
 
 import androidx.lifecycle.LiveData;
 

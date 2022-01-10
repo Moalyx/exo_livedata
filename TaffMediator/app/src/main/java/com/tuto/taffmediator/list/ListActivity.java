@@ -1,11 +1,13 @@
-package com.tuto.taffmediator;
+package com.tuto.taffmediator.list;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+
+import com.tuto.taffmediator.data.Item;
+import com.tuto.taffmediator.R;
 
 import java.util.List;
 
@@ -13,9 +15,9 @@ public class ListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     MyAdapter myAdapter;
-    SecondViewModel secondViewModel;
+    ListViewModel listViewModel;
 //    List<Item> item = secondViewModel.getListItemLiveData();
-    List<Item> item = secondViewModel.getListItemLiveData().getValue();
+    List<Item> item = listViewModel.getListItemLiveData().getValue();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
