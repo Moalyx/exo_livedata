@@ -72,7 +72,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        plus.setOnClickListener(view -> mViewModel.onIncreaseButtonClick());
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mViewModel.onIncreaseButtonClick();
+            }
+        });
 
         mViewModel.getMessageLiveData().observe(this, new Observer<String>() {
             @Override
