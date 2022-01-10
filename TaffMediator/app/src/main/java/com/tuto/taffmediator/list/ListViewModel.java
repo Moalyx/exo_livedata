@@ -1,18 +1,19 @@
-package com.tuto.taffmediator;
+package com.tuto.taffmediator.list;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.ArrayList;
+import com.tuto.taffmediator.data.Item;
+import com.tuto.taffmediator.data.TestRepository;
+
 import java.util.List;
 
-public class SecondViewModel extends ViewModel {
+public class ListViewModel extends ViewModel {
 
     private final TestRepository testRepository;
 
 
-    public SecondViewModel(TestRepository testRepository){
+    public ListViewModel(TestRepository testRepository){
         this.testRepository = testRepository;
     }
 

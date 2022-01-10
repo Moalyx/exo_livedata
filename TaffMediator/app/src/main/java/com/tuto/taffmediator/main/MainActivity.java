@@ -1,4 +1,4 @@
-package com.tuto.taffmediator;
+package com.tuto.taffmediator.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.tuto.taffmediator.R;
+import com.tuto.taffmediator.list.ListActivity;
 
 public class MainActivity extends AppCompatActivity {
 
