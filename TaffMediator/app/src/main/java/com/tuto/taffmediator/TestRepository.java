@@ -35,7 +35,7 @@ public class TestRepository {
         quantityMutableLiveData.setValue(value);
     }
 
-    public void addItemMutableLiveDateToList(){
+    public void addItemMutableLiveDateToList(Item item){ // ici j'avais oublié de rajouter le parametre Item item mais meme avec le changement je n'ai pas de resultat
         items.add(item);
         itemMutableLiveDataList.setValue(items);
 

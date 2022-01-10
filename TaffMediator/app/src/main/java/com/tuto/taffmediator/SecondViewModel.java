@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SecondViewModel extends ViewModel {
 
-    private TestRepository testRepository;
+    private final TestRepository testRepository;
 
 
     public SecondViewModel(TestRepository testRepository){

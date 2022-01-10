@@ -2,8 +2,8 @@ package com.tuto.taffmediator;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
-
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
@@ -32,14 +32,19 @@ public class MainViewModel extends ViewModel {
 
         mediatorLiveData.addSource(quantityLiveData, quantity -> combine(priceLiveData.getValue(), nameLiveData.getValue(), quantity, totalPriceLiveData.getValue()));
 
-        mediatorLiveData.addSource(totalPriceLiveData, totalPrice -> combine(priceLiveData.getValue(), nameLiveData.getValue(), quantityLiveData.getValue(), totalPriceLiveData.getValue()));
+        mediatorLiveData.addSource(totalPriceLiveData, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer totalPrice) {
+                MainViewModel.this.combine(priceLiveData.getValue(), nameLiveData.getValue(), quantityLiveData.getValue(), totalPriceLiveData.getValue());
+            }
+        });
     }
 
     private void combine (Integer price , String name, Integer quantity, Integer totalPrice){
 
         mediatorLiveData.setValue("Vous avez acheté la quantité de " + quantity + " " + name + " au prix unitaire de " + price + " pour un prix total de " + totalPrice);
         item = new Item (price, name, quantity, totalPrice);
-        testRepository.addItemMutableLiveDateToList();
+        testRepository.addItemMutableLiveDateToList(item);
     }
 
     public LiveData<String> getMessageLiveData(){return mediatorLiveData;}

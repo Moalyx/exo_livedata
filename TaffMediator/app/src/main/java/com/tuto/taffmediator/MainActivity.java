@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,15 +61,25 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                mViewModel.onPriceChanged(Integer.parseInt(s.toString()));
+                mViewModel.onPriceChanged(Integer.parseInt(s.toString())); // j'ai eu une difficulté ici!
             }
         });
 
-        minus.setOnClickListener(view -> mViewModel.onDecreaseButtonClick());
+        minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mViewModel.onDecreaseButtonClick();
+            }
+        });
 
         plus.setOnClickListener(view -> mViewModel.onIncreaseButtonClick());
 
-        mViewModel.getMessageLiveData().observe(this, messageText::setText);
+        mViewModel.getMessageLiveData().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String text) {
+                messageText.setText(text);
+            }
+        });
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
