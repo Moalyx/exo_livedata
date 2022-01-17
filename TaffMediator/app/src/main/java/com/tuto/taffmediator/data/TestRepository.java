@@ -33,11 +33,22 @@ public class TestRepository {
         quantityMutableLiveData.setValue(value);
     }
 
+
+
     public void addItemMutableLiveDateToList(Item item) { // ici j'avais oublié de rajouter le parametre Item item mais meme avec le changement je n'ai pas de resultat
         items.add(item);
         itemMutableLiveDataList.setValue(items);
-
     }
+
+    public void addItemToList(Item item){
+        items.add(item);
+    }
+
+    public List<Item> getAllItemsList (){
+        return items;
+    }
+
+
 
 //    public void setTotalPriceMutableLiveData(Integer value, Integer value2){
 //       value = quantityMutableLiveData.getValue();

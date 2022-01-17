@@ -1,5 +1,7 @@
 package com.tuto.taffmediator.main;
 
+import android.widget.Toast;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -21,11 +23,12 @@ public class MainViewModel extends ViewModel {
 
     private final MutableLiveData<Integer> priceLiveData = new MutableLiveData<>(0);
 
-    public MainViewModel(/*TestRepository testRepository*/) { // TODO MO décommente :p
-        this.testRepository = new TestRepository();
+    public MainViewModel(TestRepository testRepository) { // TODO MO décommente :p
+        this.testRepository = testRepository;
+        
 
-        LiveData<String> nameLiveData = testRepository.getNameLiveData();
-        LiveData<Integer> quantityLiveData = testRepository.getQuantityLiveData();
+        LiveData<String> nameLiveData = this.testRepository.getNameLiveData();
+        LiveData<Integer> quantityLiveData = this.testRepository.getQuantityLiveData();
 
         mediatorLiveData.addSource(priceLiveData, price -> combine(price, nameLiveData.getValue(), quantityLiveData.getValue()));
 
@@ -39,7 +42,11 @@ public class MainViewModel extends ViewModel {
         mediatorLiveData.setValue("Vous avez acheté la quantité de " + quantity + " " + name + " au prix unitaire de " + price + " pour un prix total de " + quantity * price);
         Item item = new Item(price, name, quantity, quantity * price);
         testRepository.addItemMutableLiveDateToList(item);
+        testRepository.addItemToList(item);
+
     }
+
+    public List<Item> getItems(){return testRepository.getAllItemsList();}
 
     public LiveData<String> getMessageLiveData() {
         return mediatorLiveData;
@@ -66,8 +73,17 @@ public class MainViewModel extends ViewModel {
     }
 
     public void onDecreaseButtonClick() {
+        if (testRepository.getQuantityLiveData().getValue() < 0){
+
+        }
         testRepository.setQuantityMutableLiveData(testRepository.getQuantityLiveData().getValue() - 1);
     }
+
+    public int getQuantity(){
+        return testRepository.getQuantityLiveData().getValue();
+    }
+
+
 
 
 //    public void onTotalPriceChanged(){

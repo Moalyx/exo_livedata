@@ -1,14 +1,19 @@
 package com.tuto.taffmediator.list;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.tuto.taffmediator.DI.ViewModelFactory;
 import com.tuto.taffmediator.data.Item;
 import com.tuto.taffmediator.R;
+import com.tuto.taffmediator.main.MainViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
@@ -17,17 +22,35 @@ public class ListActivity extends AppCompatActivity {
     MyAdapter myAdapter;
     ListViewModel listViewModel;
 //    List<Item> item = secondViewModel.getListItemLiveData();
-    List<Item> item = listViewModel.getListItemLiveData().getValue();
+//    List<Item> item = listViewModel.getListItemLiveData().getValue();
+//    List<Item> items = listViewModel.getItems();
+    List<Item> items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        recyclerView = findViewById(R.id.recyclerview);
 
 
 
-        myAdapter = new MyAdapter(item,this);
+        final ListViewModel listViewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(ListViewModel.class);
+        listViewModel.getViewStateItemLiveData().observe(this, new Observer<List<ItemViewState>>() {
+            @Override
+            public void onChanged(List<ItemViewState> itemsViewState) {
+                myAdapter.submitList(itemsViewState);
+            }
+        });
+
+       //items = listViewModel.getItems();
+        //items = listViewModel.getListItemLiveData().getValue();
+
+        myAdapter = new MyAdapter();
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+
     }
 }

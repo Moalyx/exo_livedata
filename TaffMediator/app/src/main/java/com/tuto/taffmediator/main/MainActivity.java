@@ -1,5 +1,6 @@
 package com.tuto.taffmediator.main;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,11 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.tuto.taffmediator.DI.ViewModelFactory;
 import com.tuto.taffmediator.R;
 import com.tuto.taffmediator.list.ListActivity;
 
@@ -25,14 +28,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
         EditText name = findViewById(R.id.itemname);
         EditText price = findViewById(R.id.itemprice);
         Button minus =findViewById(R.id.buttonminus);
         Button plus = findViewById(R.id.buttonplus);
         TextView messageText = findViewById(R.id.message);
         Button addButton =findViewById(R.id.addbutton);
+
+        final MainViewModel mViewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(MainViewModel.class);
 
         name.addTextChangedListener(new TextWatcher() {
             @Override
@@ -71,13 +74,21 @@ public class MainActivity extends AppCompatActivity {
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (mViewModel.getQuantity() < 2){
+                    Toast.makeText(MainActivity.this, "Vous ne pouvez pas saisir une quantité négative", Toast.LENGTH_SHORT).show();
+                    minus.setEnabled(false);
+                }
                 mViewModel.onDecreaseButtonClick();
+
             }
         });
 
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(mViewModel.getQuantity() > -2){
+                    minus.setEnabled(true);
+                }
                 mViewModel.onIncreaseButtonClick();
             }
         });
@@ -92,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(MainActivity.this, ListActivity.class);
                 startActivity(intent);
             }
