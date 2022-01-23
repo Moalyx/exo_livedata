@@ -42,6 +42,7 @@ public class ListActivity extends AppCompatActivity {
 
 
         final ListViewModel listViewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(ListViewModel.class);
+
         listViewModel.getViewStateItemLiveData().observe(this, new Observer<List<ItemViewState>>() {
             @Override
             public void onChanged(List<ItemViewState> itemsViewState) {

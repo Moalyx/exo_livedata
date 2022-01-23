@@ -21,7 +21,7 @@ import com.tuto.taffmediator.list.ListActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    MainViewModel mViewModel;
+    private MainViewModel mViewModel; // pour quoi ici je peux pas mettre final alors qu'a la ligne 38 cela est possible?
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         TextView messageText = findViewById(R.id.message);
         Button addButton =findViewById(R.id.addbutton);
 
-        final MainViewModel mViewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(MainViewModel.class);
+        mViewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(MainViewModel.class);
 
         name.addTextChangedListener(new TextWatcher() {
             @Override
@@ -95,10 +95,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mViewModel.getMessageLiveData().observe(this, new Observer<String>() {
+        mViewModel.getMessageLiveData().observe(this, new Observer<MainViewState>() {
             @Override
-            public void onChanged(String text) {
-                messageText.setText(text);
+            public void onChanged(MainViewState mainViewState) {
+                messageText.setText(mainViewState.getSentence());
             }
         });
 

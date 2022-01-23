@@ -17,7 +17,7 @@ import java.util.List;
 public class MainViewModel extends ViewModel {
 
     private final TestRepository testRepository;
-    private final MediatorLiveData<String> mediatorLiveData = new MediatorLiveData<>();
+    private final MediatorLiveData<MainViewState> mediatorLiveData = new MediatorLiveData<>();
 
     private Item item;
     private List<Item> items = new ArrayList<>();
@@ -44,7 +44,9 @@ public class MainViewModel extends ViewModel {
 
     private void combine(Integer price, String name, Integer quantity) {
 
-        mediatorLiveData.setValue("Vous avez acheté la quantité de " + quantity + " " + name + " au prix unitaire de " + price + " pour un prix total de " + quantity * price);
+        String sentence = "Vous avez acheté la quantité de " + quantity + " " + name + " au prix unitaire de " + price + " pour un prix total de " + quantity * price;
+
+        mediatorLiveData.setValue(new MainViewState(sentence));
 //        item = new Item(price, name, quantity, quantity * price);
 //        items.add(item);
 //        testRepository.addItemMutableLiveDateToList(item);
@@ -53,21 +55,11 @@ public class MainViewModel extends ViewModel {
     public void addItemtoList(Integer price, String name, Integer quant, Integer total){
         item = new Item(price, name, quant, total );
         testRepository.addItemMutableLiveDateToList(item);
-
-
-
-        //testRepository.addItemMutableLiveDateToList(item);
-    }
-
-    public void addItemtoList2(Integer price, String name, Integer quantity, Integer total){
-
-        item = new Item(price, name, quantity, quantity * price);
-        testRepository.addItemMutableLiveDateToList2(items);
     }
 
     public List<Item> getItems(){return testRepository.getAllItemsList();}
 
-    public LiveData<String> getMessageLiveData() {
+    public LiveData<MainViewState> getMessageLiveData() {
         return mediatorLiveData;
     }
 
