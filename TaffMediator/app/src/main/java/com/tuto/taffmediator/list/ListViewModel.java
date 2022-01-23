@@ -28,7 +28,7 @@ public class ListViewModel extends ViewModel {
 
     }
 
-    public LiveData<List<ItemViewState>> getViewStateItemLiveData(){
+        public LiveData<List<ItemViewState>> getViewStateItemLiveData(){
         return Transformations.map(testRepository.getItemMutableLiveDataList(), new Function<List<Item>, List<ItemViewState>>() {
             @Override
             public List<ItemViewState> apply(List<Item> items) {
@@ -36,10 +36,10 @@ public class ListViewModel extends ViewModel {
                 for(Item item : items){
                         itemsViewState.add(
                                 new ItemViewState(
-                                        item.getUnitPrice(),
-                                        item.getName(),
-                                        item.getQuantity(),
-                                        item.getTotal()
+                                        "" + item.getUnitPrice(),
+                                        "" + item.getName(),
+                                        "" + item.getQuantity(),
+                                        "" + item.getTotal()
                                 )
                         );
                     }

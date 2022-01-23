@@ -38,10 +38,6 @@ public class MyAdapter extends ListAdapter<ItemViewState, MyAdapter.MyViewHolder
         holder.onBind(getItem(position));
 
     }
-//    public void setItemList (List<Item> items){
-//        this.itemList = items;
-//        notifyDataSetChanged();
-//    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 

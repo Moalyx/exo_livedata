@@ -5,32 +5,37 @@ import android.widget.Toast;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.tuto.taffmediator.data.Item;
 import com.tuto.taffmediator.data.TestRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
 
-    private final TestRepository testRepository; //lorque j'ai mis final cela a souligné en rouge
+    private final TestRepository testRepository;
     private final MediatorLiveData<String> mediatorLiveData = new MediatorLiveData<>();
 
-//    LiveData<Integer> priceLiveData = testRepository.getPriceLiveData();
-//    LiveData<String> nameLiveData = testRepository.getNameLiveData();
-//    LiveData<Integer> quantityLiveData = testRepository.getQuantityLiveData();
-
-    private final MutableLiveData<Integer> priceLiveData = new MutableLiveData<>(0);
+    private Item item;
+    private List<Item> items = new ArrayList<>();
 
     public MainViewModel(TestRepository testRepository) { // TODO MO décommente :p
         this.testRepository = testRepository;
-        
 
         LiveData<String> nameLiveData = this.testRepository.getNameLiveData();
         LiveData<Integer> quantityLiveData = this.testRepository.getQuantityLiveData();
+        LiveData<Integer> priceLiveData = this.testRepository.getPriceLiveData();
 
-        mediatorLiveData.addSource(priceLiveData, price -> combine(price, nameLiveData.getValue(), quantityLiveData.getValue()));
+
+        mediatorLiveData.addSource(priceLiveData, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer price) {
+                MainViewModel.this.combine(price, nameLiveData.getValue(), quantityLiveData.getValue());
+            }
+        });
 
         mediatorLiveData.addSource(nameLiveData, name -> combine(priceLiveData.getValue(), name, quantityLiveData.getValue()));
 
@@ -40,10 +45,24 @@ public class MainViewModel extends ViewModel {
     private void combine(Integer price, String name, Integer quantity) {
 
         mediatorLiveData.setValue("Vous avez acheté la quantité de " + quantity + " " + name + " au prix unitaire de " + price + " pour un prix total de " + quantity * price);
-        Item item = new Item(price, name, quantity, quantity * price);
-        testRepository.addItemMutableLiveDateToList(item);
-        testRepository.addItemToList(item);
+//        item = new Item(price, name, quantity, quantity * price);
+//        items.add(item);
+//        testRepository.addItemMutableLiveDateToList(item);
+    }
 
+    public void addItemtoList(Integer price, String name, Integer quant, Integer total){
+        item = new Item(price, name, quant, total );
+        testRepository.addItemMutableLiveDateToList(item);
+
+
+
+        //testRepository.addItemMutableLiveDateToList(item);
+    }
+
+    public void addItemtoList2(Integer price, String name, Integer quantity, Integer total){
+
+        item = new Item(price, name, quantity, quantity * price);
+        testRepository.addItemMutableLiveDateToList2(items);
     }
 
     public List<Item> getItems(){return testRepository.getAllItemsList();}
@@ -57,16 +76,12 @@ public class MainViewModel extends ViewModel {
     }
 
     public void onPriceChanged(int price) {
-        priceLiveData.setValue(price);
+        testRepository.setPriceMutableLiveData(price);
     }
 
     public void onNameChanged(String name) {
         testRepository.setNameMutableLiveData(name);
     }
-
-//    public void onQuantityChanged (Integer quantity){
-//        testRepository.setQuantityMutableLiveData(quantity);
-//    }
 
     public void onIncreaseButtonClick() {
         testRepository.setQuantityMutableLiveData(testRepository.getQuantityLiveData().getValue() + 1);
@@ -83,11 +98,10 @@ public class MainViewModel extends ViewModel {
         return testRepository.getQuantityLiveData().getValue();
     }
 
+    public int getPrice(){return testRepository.getPriceLiveData().getValue();}
+
+    public String getName(){return testRepository.getNameLiveData().getValue();}
 
 
-
-//    public void onTotalPriceChanged(){
-//
-//    }
 
 }

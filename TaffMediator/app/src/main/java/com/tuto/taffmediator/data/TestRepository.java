@@ -1,6 +1,7 @@
 package com.tuto.taffmediator.data;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
@@ -11,7 +12,13 @@ public class TestRepository {
     private final MutableLiveData<String> nameMutableLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> quantityMutableLiveData = new MutableLiveData<>(0);
     private final MutableLiveData<List<Item>> itemMutableLiveDataList = new MutableLiveData<>();
+    private final MutableLiveData<Integer> priceMutableLiveData = new MutableLiveData<>(0);
+
+
+
     private final List<Item> items = new ArrayList<>();
+
+    //ublic MediatorLiveData<String> getMediatorLiveData() { return mediatorLiveData;}
 
     public LiveData<String> getNameLiveData() {
         return nameMutableLiveData;
@@ -21,9 +28,14 @@ public class TestRepository {
         return quantityMutableLiveData;
     }
 
+    public LiveData<Integer> getPriceLiveData() {
+        return priceMutableLiveData;
+    }
+
     public LiveData<List<Item>> getItemMutableLiveDataList() {
         return itemMutableLiveDataList;
     }
+
 
     public void setNameMutableLiveData(String value) {
         nameMutableLiveData.setValue(value);
@@ -32,11 +44,20 @@ public class TestRepository {
     public void setQuantityMutableLiveData(Integer value) {
         quantityMutableLiveData.setValue(value);
     }
+    public void setPriceMutableLiveData(Integer value){
+        priceMutableLiveData.setValue(value);
+    }
 
+//    public void setMediatorLiveData(String value){
+//        mediatorLiveData.setValue(value);
+//    }
 
-
-    public void addItemMutableLiveDateToList(Item item) { // ici j'avais oublié de rajouter le parametre Item item mais meme avec le changement je n'ai pas de resultat
+    public void addItemMutableLiveDateToList(Item item) {
         items.add(item);
+        itemMutableLiveDataList.setValue(items);
+    }
+
+    public void addItemMutableLiveDateToList2 (List<Item> items) {
         itemMutableLiveDataList.setValue(items);
     }
 
@@ -47,13 +68,4 @@ public class TestRepository {
     public List<Item> getAllItemsList (){
         return items;
     }
-
-
-
-//    public void setTotalPriceMutableLiveData(Integer value, Integer value2){
-//       value = quantityMutableLiveData.getValue();
-//       value2 = unitPriceMutableLiveData.getValue();
-//       int sum = value * value2;
-//       totalPriceMutableLiveData.setValue(sum);
-//    }
 }

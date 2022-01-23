@@ -4,19 +4,19 @@ import java.util.Objects;
 
 public class ItemViewState {
 
-    private int unitPrice;
+    private String unitPrice;
     private String name;
-    private int quantity;
-    private int total;
+    private String quantity;
+    private String total;
 
-    public ItemViewState (int unitPrice, String name, int quantity, int total){
+    public ItemViewState (String unitPrice, String name, String quantity, String total){
         this.unitPrice = unitPrice;
         this.name = name;
         this.quantity = quantity;
         this.total = total;
     }
 
-    public int getUnitPrice() {
+    public String getUnitPrice() {
         return unitPrice;
     }
 
@@ -24,11 +24,11 @@ public class ItemViewState {
         return name;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public int getTotal() {
+    public String getTotal() {
         return total;
     }
 

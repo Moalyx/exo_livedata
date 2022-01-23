@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,10 +102,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mViewModel.addItemtoList(mViewModel.getPrice(), mViewModel.getName(),mViewModel.getQuantity(),mViewModel.getPrice()*mViewModel.getQuantity() );
                 Intent intent = new Intent(MainActivity.this, ListActivity.class);
                 startActivity(intent);
             }
