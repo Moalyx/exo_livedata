@@ -22,8 +22,6 @@ public class ListViewModel extends ViewModel {
 
     public LiveData<List<Item>> getListItemLiveData(){return testRepository.getItemMutableLiveDataList();}
 
-    public List<Item> getItems(){return testRepository.getAllItemsList();}
-
     public void getItemList(Item item){
 
     }

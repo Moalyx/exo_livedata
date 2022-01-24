@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                mViewModel.onPriceChanged(Integer.parseInt(s.toString())); // j'ai eu une difficulté ici!
+                mViewModel.onPriceChanged(s.toString());
             }
         });
 
@@ -76,10 +76,7 @@ public class MainActivity extends AppCompatActivity {
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mViewModel.getQuantity() < 2){
-                    Toast.makeText(MainActivity.this, "Vous ne pouvez pas saisir une quantité négative", Toast.LENGTH_SHORT).show();
-                    minus.setEnabled(false);
-                }
+//                    Toast.makeText(MainActivity.this, "Vous ne pouvez pas saisir une quantité négative", Toast.LENGTH_SHORT).show();
                 mViewModel.onDecreaseButtonClick();
 
             }
@@ -88,9 +85,6 @@ public class MainActivity extends AppCompatActivity {
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mViewModel.getQuantity() > -2){
-                    minus.setEnabled(true);
-                }
                 mViewModel.onIncreaseButtonClick();
             }
         });
@@ -99,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(MainViewState mainViewState) {
                 messageText.setText(mainViewState.getSentence());
+                minus.setEnabled(mainViewState.isMinusButtonEnabled());
             }
         });
 
@@ -107,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mViewModel.addItemtoList(mViewModel.getPrice(), mViewModel.getName(),mViewModel.getQuantity(),mViewModel.getPrice()*mViewModel.getQuantity() );
+                mViewModel.onAddButtonClicked();
                 Intent intent = new Intent(MainActivity.this, ListActivity.class);
                 startActivity(intent);
             }

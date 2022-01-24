@@ -1,99 +1,110 @@
 package com.tuto.taffmediator.main;
 
-import android.widget.Toast;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.tuto.taffmediator.data.Item;
 import com.tuto.taffmediator.data.TestRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainViewModel extends ViewModel {
 
     private final TestRepository testRepository;
+
     private final MediatorLiveData<MainViewState> mediatorLiveData = new MediatorLiveData<>();
 
-    private Item item;
-    private List<Item> items = new ArrayList<>();
+    private final MutableLiveData<String> nameMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Integer> quantityMutableLiveData = new MutableLiveData<>(0);
+    private final MutableLiveData<Integer> priceMutableLiveData = new MutableLiveData<>(0);
 
-    public MainViewModel(TestRepository testRepository) { // TODO MO décommente :p
+    public MainViewModel(TestRepository testRepository) {
         this.testRepository = testRepository;
 
-        LiveData<String> nameLiveData = this.testRepository.getNameLiveData();
-        LiveData<Integer> quantityLiveData = this.testRepository.getQuantityLiveData();
-        LiveData<Integer> priceLiveData = this.testRepository.getPriceLiveData();
-
-
-        mediatorLiveData.addSource(priceLiveData, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer price) {
-                MainViewModel.this.combine(price, nameLiveData.getValue(), quantityLiveData.getValue());
-            }
-        });
-
-        mediatorLiveData.addSource(nameLiveData, name -> combine(priceLiveData.getValue(), name, quantityLiveData.getValue()));
-
-        mediatorLiveData.addSource(quantityLiveData, quantity -> combine(priceLiveData.getValue(), nameLiveData.getValue(), quantity));
+        mediatorLiveData.addSource(priceMutableLiveData, price -> combine(
+            price,
+            nameMutableLiveData.getValue(),
+            quantityMutableLiveData.getValue()
+        ));
+        mediatorLiveData.addSource(nameMutableLiveData, name -> combine(
+            priceMutableLiveData.getValue(),
+            name,
+            quantityMutableLiveData.getValue()
+        ));
+        mediatorLiveData.addSource(quantityMutableLiveData, quantity -> combine(
+            priceMutableLiveData.getValue(),
+            nameMutableLiveData.getValue(),
+            quantity
+        ));
     }
 
     private void combine(Integer price, String name, Integer quantity) {
+        String sentence = "Vous avez acheté la quantité de " + quantity + " " + name
+            + " au prix unitaire de " + price
+            + " pour un prix total de " + quantity * price;
 
-        String sentence = "Vous avez acheté la quantité de " + quantity + " " + name + " au prix unitaire de " + price + " pour un prix total de " + quantity * price;
+        boolean isMinusButtonEnabled = quantity > 0;
 
-        mediatorLiveData.setValue(new MainViewState(sentence));
-//        item = new Item(price, name, quantity, quantity * price);
-//        items.add(item);
-//        testRepository.addItemMutableLiveDateToList(item);
+        mediatorLiveData.setValue(new MainViewState(sentence, isMinusButtonEnabled));
     }
 
-    public void addItemtoList(Integer price, String name, Integer quant, Integer total){
-        item = new Item(price, name, quant, total );
-        testRepository.addItemMutableLiveDateToList(item);
+    private void addItemToList(int price, String name, int quantity, int total) {
+        testRepository.addItemMutableLiveDateToList(new Item(price, name, quantity, total));
     }
-
-    public List<Item> getItems(){return testRepository.getAllItemsList();}
 
     public LiveData<MainViewState> getMessageLiveData() {
         return mediatorLiveData;
     }
 
-    public LiveData<List<Item>> getListItemLiveData() {
-        return testRepository.getItemMutableLiveDataList();
-    }
+    public void onPriceChanged(String price) {
+        Integer parsedPrice = null;
 
-    public void onPriceChanged(int price) {
-        testRepository.setPriceMutableLiveData(price);
+        try {
+            parsedPrice = Integer.parseInt(price);
+        } catch (NumberFormatException exception) {
+            exception.printStackTrace();
+        }
+
+        if (parsedPrice != null) {
+            priceMutableLiveData.setValue(parsedPrice);
+        }
     }
 
     public void onNameChanged(String name) {
-        testRepository.setNameMutableLiveData(name);
+        nameMutableLiveData.setValue(name);
     }
 
     public void onIncreaseButtonClick() {
-        testRepository.setQuantityMutableLiveData(testRepository.getQuantityLiveData().getValue() + 1);
+        Integer previousValue = quantityMutableLiveData.getValue();
+
+        if (previousValue != null) {
+            quantityMutableLiveData.setValue(previousValue + 1);
+        } else {
+            quantityMutableLiveData.setValue(1);
+        }
     }
 
     public void onDecreaseButtonClick() {
-        if (testRepository.getQuantityLiveData().getValue() < 0){
+        Integer previousValue = quantityMutableLiveData.getValue();
 
+        if (previousValue != null) {
+            quantityMutableLiveData.setValue(previousValue - 1);
+        } else {
+            quantityMutableLiveData.setValue(0);
         }
-        testRepository.setQuantityMutableLiveData(testRepository.getQuantityLiveData().getValue() - 1);
     }
 
-    public int getQuantity(){
-        return testRepository.getQuantityLiveData().getValue();
+    public void onAddButtonClicked() {
+        Integer quantity = quantityMutableLiveData.getValue();
+        Integer price = priceMutableLiveData.getValue();
+
+        if (quantity != null && price != null) {
+            addItemToList(
+                price,
+                nameMutableLiveData.getValue(),
+                quantity,
+                quantity * price
+            );
+        }
     }
-
-    public int getPrice(){return testRepository.getPriceLiveData().getValue();}
-
-    public String getName(){return testRepository.getNameLiveData().getValue();}
-
-
-
 }
