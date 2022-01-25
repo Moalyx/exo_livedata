@@ -1,7 +1,6 @@
 package com.tuto.taffmediator.data;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
@@ -14,11 +13,10 @@ public class TestRepository {
     private final MutableLiveData<List<Item>> itemMutableLiveDataList = new MutableLiveData<>();
     private final MutableLiveData<Integer> priceMutableLiveData = new MutableLiveData<>(0);
 
-
-
     private final List<Item> items = new ArrayList<>();
 
-    //ublic MediatorLiveData<String> getMediatorLiveData() { return mediatorLiveData;}
+
+    //public MediatorLiveData<String> getMediatorLiveData() { return mediatorLiveData;}
 
     public LiveData<String> getNameLiveData() {
         return nameMutableLiveData;

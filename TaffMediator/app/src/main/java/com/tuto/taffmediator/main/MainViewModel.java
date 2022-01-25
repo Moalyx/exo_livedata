@@ -18,9 +18,8 @@ public class MainViewModel extends ViewModel {
 
     private final TestRepository testRepository;
     private final MediatorLiveData<MainViewState> mediatorLiveData = new MediatorLiveData<>();
-
     private Item item;
-    private List<Item> items = new ArrayList<>();
+
 
     public MainViewModel(TestRepository testRepository) { // TODO MO décommente :p
         this.testRepository = testRepository;
@@ -57,7 +56,7 @@ public class MainViewModel extends ViewModel {
         testRepository.addItemMutableLiveDateToList(item);
     }
 
-    public List<Item> getItems(){return testRepository.getAllItemsList();}
+
 
     public LiveData<MainViewState> getMessageLiveData() {
         return mediatorLiveData;
