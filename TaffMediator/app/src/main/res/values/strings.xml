@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">TaffMediator</string>
+    <string name="produit">Produit :</string>
+    <string name="name">name</string>
+    <string name="prix_unitaire">Prix unitaire :</string>
+    <string name="unitprice">unitprice</string>
+    <string name="quantit">Quantité :</string>
+    <string name="quantity">quantity</string>
+    <string name="prix_total">Prix total :</string>
+    <string name="totalprice">totalprice</string>
+    <string name="voici_la_liste_de_vos_courses">Voici la liste de vos courses</string>
+    <string name="supprimer">supprimer</string>
+    <string name="le_montant_de_votre_panier_est_de">Le montant de votre panier est de :</string>
 </resources>

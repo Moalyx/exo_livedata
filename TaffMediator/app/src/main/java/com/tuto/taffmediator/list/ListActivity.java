@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.tuto.taffmediator.DI.ViewModelFactory;
 import com.tuto.taffmediator.data.Item;
@@ -22,8 +23,6 @@ import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private Button returnButton;
     private MyAdapter myAdapter;
     private ListViewModel listViewModel;
 //    List<Item> item = secondViewModel.getListItemLiveData();
@@ -35,8 +34,10 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        recyclerView = findViewById(R.id.recyclerview);
-        returnButton = findViewById(R.id.returnbutton);
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        Button returnButton = findViewById(R.id.returnbutton);
+        TextView montant = findViewById(R.id.montant);
+
 
 
 
@@ -50,7 +51,7 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-        myAdapter = new MyAdapter();
+        myAdapter = new MyAdapter(name -> listViewModel.onDeleteItemClicked(name));
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -61,6 +62,8 @@ public class ListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        montant.setText(String.valueOf(listViewModel.onTotalshopping()));
 
 
 

@@ -20,7 +20,7 @@ public class MainViewState {
 
     public boolean isMinusButtonEnabled() {
         return isMinusButtonEnabled;
-    }
+    } // on met dans le viewstate le button parce que on met tout ce qui est dynamique sur la vue et comme le bouton change et se desactive on l'ajoute au viewstate pour le gerer
 
     @Override
     public boolean equals(Object o) {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,10 +20,14 @@ import java.util.List;
 
 public class MyAdapter extends ListAdapter<ItemViewState, MyAdapter.MyViewHolder> {
 
+    private final OnItemClickedListener listener;
 
 
-    public MyAdapter(){
+
+
+    public MyAdapter(OnItemClickedListener listener){
         super (new ItemCallback());
+        this.listener = listener;
     }
 
     @NonNull
@@ -35,16 +40,17 @@ public class MyAdapter extends ListAdapter<ItemViewState, MyAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.onBind(getItem(position));
+        holder.onBind(getItem(position), listener);
 
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView name;
         TextView unitprice;
         TextView quantity;
         TextView totalprice;
+        ImageView delete;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -53,10 +59,12 @@ public class MyAdapter extends ListAdapter<ItemViewState, MyAdapter.MyViewHolder
             unitprice = itemView.findViewById(R.id.unitprice);
             quantity = itemView.findViewById(R.id.quantity);
             totalprice = itemView.findViewById(R.id.totalprice);
+            delete = itemView.findViewById(R.id.delete);
 
         }
 
-        public void onBind (ItemViewState item){
+        public void onBind (ItemViewState item, OnItemClickedListener listener){
+            delete.setOnClickListener(view -> listener.onDeleteItemClicked(item.getName()));
             name.setText(item.getName());
             unitprice.setText(item.getUnitPrice());
             quantity.setText(item.getQuantity());
@@ -69,7 +77,7 @@ public class MyAdapter extends ListAdapter<ItemViewState, MyAdapter.MyViewHolder
 
         @Override
         public boolean areItemsTheSame(@NonNull ItemViewState oldItem, @NonNull ItemViewState newItem) {
-            return oldItem.getName() == newItem.getName();
+            return oldItem.getName().equals(newItem.getName());
         }
 
         @Override

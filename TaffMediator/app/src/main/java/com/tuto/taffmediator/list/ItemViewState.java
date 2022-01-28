@@ -8,12 +8,14 @@ public class ItemViewState {
     private String name;
     private String quantity;
     private String total;
+    //private String amount;
 
     public ItemViewState (String unitPrice, String name, String quantity, String total){
         this.unitPrice = unitPrice;
         this.name = name;
         this.quantity = quantity;
         this.total = total;
+        //this.amount = amount;
     }
 
     public String getUnitPrice() {

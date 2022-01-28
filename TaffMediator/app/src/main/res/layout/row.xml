@@ -1,53 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="40dp">
+
+<!--    <TextView-->
+<!--        android:id="@+id/txt1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:text="@string/produit"-->
+<!--        android:textColor="@color/purple_700"-->
+<!--        android:textSize="12sp"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/name"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="name"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="12dp"
+        android:hint="@string/name"
+        android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/unitprice"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="12dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/txt2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:text="@string/prix_unitaire"-->
+<!--        android:textColor="@color/purple_700"-->
+<!--        android:textSize="12sp"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/unitprice"-->
+<!--        app:layout_constraintStart_toEndOf="@id/name"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/unitprice"
-        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="unitprice"
-        android:textSize="25sp"
-        app:layout_constraintStart_toEndOf="@+id/name"
+        android:layout_marginTop="12dp"
+        android:hint="@string/unitprice"
+        android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/quantity"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="12dp"/>
+        app:layout_constraintStart_toEndOf="@id/name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/txt3"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:text="@string/quantit"-->
+<!--        android:textColor="@color/purple_700"-->
+<!--        android:textSize="12sp"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/quantity"-->
+<!--        app:layout_constraintStart_toEndOf="@id/unitprice"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/quantity"
-        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="quantity"
-        android:textSize="25sp"
-        app:layout_constraintStart_toEndOf="@id/unitprice"
+        android:layout_marginTop="12dp"
+        android:hint="@string/quantity"
+        android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/totalprice"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="12dp"/>
+        app:layout_constraintStart_toEndOf="@id/unitprice"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/txt4"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:text="@string/prix_total"-->
+<!--        android:textColor="@color/purple_700"-->
+<!--        android:textSize="12sp"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/totalprice"-->
+<!--        app:layout_constraintStart_toEndOf="@id/quantity"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/totalprice"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="@string/totalprice"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/delete"
+        app:layout_constraintStart_toEndOf="@id/quantity"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="totalprice"
-        android:textSize="25sp"
-        app:layout_constraintStart_toEndOf="@id/quantity"
+        app:layout_constraintStart_toEndOf="@id/totalprice"
+        android:background="?selectableItemBackground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_baseline_delete_24"
+        app:layout_constraintBottom_toBottomOf="@id/totalprice"
+        app:layout_constraintTop_toTopOf="@id/totalprice"
+        android:layout_marginEnd="5dp"
         />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/black"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,5 +47,13 @@ public class ListViewModel extends ViewModel {
         });
     }
 
+    public void onDeleteItemClicked(String name){
+        testRepository.onDeleteItemClicked(name);
+    }
+
+    public int onTotalshopping(){
+        return testRepository.onTotalshopping();
+    }
+
 
 }

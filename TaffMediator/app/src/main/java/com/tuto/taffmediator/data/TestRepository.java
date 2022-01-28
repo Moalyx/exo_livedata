@@ -20,4 +20,31 @@ public class TestRepository {
         items.add(item);
         itemMutableLiveDataList.setValue(items);
     }
+    public void onDeleteItemClicked(String name){
+        List<Item> items = itemMutableLiveDataList.getValue();
+        if (items == null) return;
+
+        for (int i = 0 ; i < items.size(); i++){
+            if (items.get(i).getName().equals(name)){
+                items.remove(items.get(i));
+            }
+        }
+        itemMutableLiveDataList.setValue(items);
+    }
+
+    public int onTotalshopping(){
+        List<Item> items = itemMutableLiveDataList.getValue();
+
+        int totshop = 0;
+
+        for (int i =0 ; i < items.size(); i ++){
+            totshop += items.get(i).getTotal();
+        }
+        return totshop;
+
+    }
+
+
+
+
 }
