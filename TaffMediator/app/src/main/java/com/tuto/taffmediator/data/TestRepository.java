@@ -34,10 +34,10 @@ public class TestRepository {
 
     public int onTotalshopping(){
         List<Item> items = itemMutableLiveDataList.getValue();
-
         int totshop = 0;
+        if (items == null) return 0;
 
-        for (int i =0 ; i < items.size(); i ++){
+        for (int i = 0; i < items.size(); i++) {
             totshop += items.get(i).getTotal();
         }
         return totshop;
