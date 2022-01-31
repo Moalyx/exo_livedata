@@ -32,8 +32,9 @@ public class TestRepository {
         itemMutableLiveDataList.setValue(items);
     }
 
-    public int onTotalshopping(){
-        List<Item> items = itemMutableLiveDataList.getValue();
+    public LiveData<Integer> onTotalshopping(){
+        // TODO MO Utiliser un Transformations.map ici !
+        List<Item> items = itemMutableLiveDataList;
         int totshop = 0;
         if (items == null) return 0;
 

@@ -44,10 +44,11 @@ public class ListActivity extends AppCompatActivity {
 
         final ListViewModel listViewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(ListViewModel.class);
 
-        listViewModel.getViewStateItemLiveData().observe(this, new Observer<List<ItemViewState>>() {
+        listViewModel.getViewStateItemLiveData().observe(this, new Observer<ListViewState>() {
             @Override
-            public void onChanged(List<ItemViewState> itemsViewState) {
-                myAdapter.submitList(itemsViewState);
+            public void onChanged(ListViewState viewState) {
+                myAdapter.submitList(viewState.getItems());
+                montant.setText(viewState.getTotal());
             }
         });
 
@@ -63,7 +64,7 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-        montant.setText(String.valueOf(listViewModel.onTotalshopping()));
+
 
 
 
