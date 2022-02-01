@@ -28,48 +28,61 @@ public class ListViewModel extends ViewModel {
 
     }
 
-<<<<<<< HEAD
-    public LiveData<List<ItemViewState>> getViewStateItemLiveData() {
-=======
-    public LiveData<ListViewState> getViewStateItemLiveData() {
->>>>>>> 5ee40ec35741207401476939409abc06ab666a30
-        return Transformations.map(testRepository.getItemMutableLiveDataList(), new Function<List<Item>, List<ItemViewState>>() {
-            @Override
-            public List<ItemViewState> apply(List<Item> items) {
-                List<ItemViewState> itemsViewState = new ArrayList<>();
-                for (Item item : items) {
-                    itemsViewState.add(
-<<<<<<< HEAD
-                            new ItemViewState(
-                                    "" + item.getUnitPrice(),
-                                    "" + item.getName(),
-                                    "" + item.getQuantity(),
-                                    "" + item.getTotal()
-
-                            ));
-=======
-                        new ItemViewState(
-                            "" + item.getUnitPrice(),
-                            "" + item.getName(),
-                            "" + item.getQuantity(),
-                            "" + item.getTotal()
-                        )
-                    );
->>>>>>> 5ee40ec35741207401476939409abc06ab666a30
-                }
-
-                return itemsViewState;
-            }
-        });
+    public void getViewStateItemLiveData(){
+        testRepository.getViewStateItemLiveData();
     }
 
-    public void onDeleteItemClicked(String name) {
-        testRepository.onDeleteItemClicked(name);
-    }
-
-    public int onTotalshopping() {
-        return testRepository.onTotalshopping();
+    public LiveData<ListViewState>getListViewState(){
+        return testRepository.getListViewState();
     }
 
 
-}
+//    public LiveData<List<ItemViewState>> getViewStateItemLiveData() {
+//        return Transformations.map(testRepository.getItemMutableLiveDataList(), new Function<List<Item>, List<ItemViewState>>() {
+//            @Override
+//            public List<ItemViewState> apply(List<Item> items) {
+//                List<ItemViewState> itemsViewState = new ArrayList<>();
+//                for (Item item : items) {
+//                    itemsViewState.add(
+//                            new ItemViewState(
+//                                    "" + item.getUnitPrice(),
+//                                    "" + item.getName(),
+//                                    "" + item.getQuantity(),
+//                                    "" + item.getTotal()
+//                            )
+//                    );
+//                }
+//
+//                return itemsViewState;
+//            }
+//        });
+//    }
+
+//    public LiveData<ListViewState> getListViewState(){
+//        return Transformations.map(getViewStateItemLiveData(), new Function<List<ItemViewState>, ListViewState>() {
+//            @Override
+//            public ListViewState apply(List<ItemViewState> input) {
+//                int totshop =0;
+//                for (int i = 0; i < input.size(); i++){
+//                    totshop += Integer.parseInt(input.get(i).getTotal());
+//                }
+//
+//                ListViewState listViewState = new ListViewState(
+//                        input, ""+ totshop
+//                );
+//                return listViewState;
+//
+//            }
+//        });
+//    }
+
+
+        public void onDeleteItemClicked (String name){
+            testRepository.onDeleteItemClicked(name);
+        }
+
+        public String onTotalshopping () {
+            return null;
+        }
+
+    }

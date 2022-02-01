@@ -41,21 +41,41 @@ public class ListActivity extends AppCompatActivity {
 
         final ListViewModel listViewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(ListViewModel.class);
 
-        listViewModel.getViewStateItemLiveData().observe(this, new Observer<ListViewState>() {
+//        listViewModel.getViewStateItemLiveData().observe(this, new Observer<List<ItemViewState>>() {
+//            @Override
+//            public void onChanged(List<ItemViewState> viewStates) {
+//                //myAdapter.submitList(viewStates);
+//               // montant.setText(String.valueOf(listViewModel.onTotalshopping()));
+//            }
+//
+//        });
+
+        listViewModel.getListViewState().observe(this, new Observer<ListViewState>() {
             @Override
-<<<<<<< HEAD
-            public void onChanged(List<ItemViewState> itemsViewState) {
-                myAdapter.submitList(itemsViewState);
-                ;
-=======
-            public void onChanged(ListViewState viewState) {
-                myAdapter.submitList(viewState.getItems());
-                montant.setText(viewState.getTotal());
->>>>>>> 5ee40ec35741207401476939409abc06ab666a30
+            public void onChanged(ListViewState listViewState) {
+                myAdapter.submitList(listViewState.getItems());
+                montant.setText(listViewState.getTotal());
             }
         });
 
-        myAdapter = new MyAdapter(name -> listViewModel.onDeleteItemClicked(name));
+
+
+
+//        listViewModel.getListViewState().observe(this, new Observer<ListViewState>() {
+//                    @Override
+//                    public void onChanged(ListViewState viewState) {
+//                        myAdapter.submitList(viewState.getItems());
+//                        montant.setText(String.valueOf(listViewModel.onTotalshopping()));
+//                    }
+//                });
+
+
+                myAdapter = new MyAdapter(new OnItemClickedListener() {
+                    @Override
+                    public void onDeleteItemClicked(String name) {
+                        listViewModel.onDeleteItemClicked(name);
+                    }
+                });
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -67,14 +87,16 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
-        montant.setText(String.valueOf(listViewModel.onTotalshopping()));
-=======
+       // montant.setText(String.valueOf(listViewModel.onTotalshopping()));
 
 
+        //montant.setText(String.valueOf(listViewModel.onTotalshopping()));
 
 
-
->>>>>>> 5ee40ec35741207401476939409abc06ab666a30
+        }
     }
-}
+
+
+
+
+
