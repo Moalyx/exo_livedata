@@ -25,7 +25,7 @@ public class ListActivity extends AppCompatActivity {
 
     private MyAdapter myAdapter;
     private ListViewModel listViewModel;
-//    List<Item> item = secondViewModel.getListItemLiveData();
+    //    List<Item> item = secondViewModel.getListItemLiveData();
 //    List<Item> item = listViewModel.getListItemLiveData().getValue();
 //    List<Item> items = listViewModel.getItems();
     private List<Item> items = new ArrayList<>();
@@ -39,15 +39,13 @@ public class ListActivity extends AppCompatActivity {
         TextView montant = findViewById(R.id.montant);
 
 
-
-
-
         final ListViewModel listViewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(ListViewModel.class);
 
         listViewModel.getViewStateItemLiveData().observe(this, new Observer<List<ItemViewState>>() {
             @Override
             public void onChanged(List<ItemViewState> itemsViewState) {
                 myAdapter.submitList(itemsViewState);
+                ;
             }
         });
 
@@ -64,9 +62,5 @@ public class ListActivity extends AppCompatActivity {
         });
 
         montant.setText(String.valueOf(listViewModel.onTotalshopping()));
-
-
-
-
     }
 }

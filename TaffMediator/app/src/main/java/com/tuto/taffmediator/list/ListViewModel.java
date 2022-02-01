@@ -16,42 +16,44 @@ public class ListViewModel extends ViewModel {
     private final TestRepository testRepository;
 
 
-    public ListViewModel(TestRepository testRepository){
+    public ListViewModel(TestRepository testRepository) {
         this.testRepository = testRepository;
     }
 
-    public LiveData<List<Item>> getListItemLiveData(){return testRepository.getItemMutableLiveDataList();}
+    public LiveData<List<Item>> getListItemLiveData() {
+        return testRepository.getItemMutableLiveDataList();
+    }
 
-    public void getItemList(Item item){
+    public void getItemList(Item item) {
 
     }
 
-        public LiveData<List<ItemViewState>> getViewStateItemLiveData(){
+    public LiveData<List<ItemViewState>> getViewStateItemLiveData() {
         return Transformations.map(testRepository.getItemMutableLiveDataList(), new Function<List<Item>, List<ItemViewState>>() {
             @Override
             public List<ItemViewState> apply(List<Item> items) {
                 List<ItemViewState> itemsViewState = new ArrayList<>();
-                for(Item item : items){
-                        itemsViewState.add(
-                                new ItemViewState(
-                                        "" + item.getUnitPrice(),
-                                        "" + item.getName(),
-                                        "" + item.getQuantity(),
-                                        "" + item.getTotal()
-                                )
-                        );
-                    }
+                for (Item item : items) {
+                    itemsViewState.add(
+                            new ItemViewState(
+                                    "" + item.getUnitPrice(),
+                                    "" + item.getName(),
+                                    "" + item.getQuantity(),
+                                    "" + item.getTotal()
+
+                            ));
+                }
 
                 return itemsViewState;
             }
         });
     }
 
-    public void onDeleteItemClicked(String name){
+    public void onDeleteItemClicked(String name) {
         testRepository.onDeleteItemClicked(name);
     }
 
-    public int onTotalshopping(){
+    public int onTotalshopping() {
         return testRepository.onTotalshopping();
     }
 

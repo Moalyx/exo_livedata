@@ -30,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
         EditText name = findViewById(R.id.itemname);
         EditText price = findViewById(R.id.itemprice);
-        Button minus =findViewById(R.id.buttonminus);
+        Button minus = findViewById(R.id.buttonminus);
         Button plus = findViewById(R.id.buttonplus);
         TextView messageText = findViewById(R.id.message);
-        Button addButton =findViewById(R.id.addbutton);
+        Button addButton = findViewById(R.id.addbutton);
 
         mViewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(MainViewModel.class);
 
@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 minus.setEnabled(mainViewState.isMinusButtonEnabled());
             }
         });
-
 
 
         addButton.setOnClickListener(new View.OnClickListener() {

@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="40dp">
 
-<!--    <TextView-->
-<!--        android:id="@+id/txt1"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="12dp"-->
-<!--        android:text="@string/produit"-->
-<!--        android:textColor="@color/purple_700"-->
-<!--        android:textSize="12sp"-->
-<!--        app:layout_constraintEnd_toStartOf="@id/name"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/txt1"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="12dp"-->
+    <!--        android:text="@string/produit"-->
+    <!--        android:textColor="@color/purple_700"-->
+    <!--        android:textSize="12sp"-->
+    <!--        app:layout_constraintEnd_toStartOf="@id/name"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/name"
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:gravity="center"
         android:hint="@string/name"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -30,24 +29,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/txt2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="12dp"-->
-<!--        android:text="@string/prix_unitaire"-->
-<!--        android:textColor="@color/purple_700"-->
-<!--        android:textSize="12sp"-->
-<!--        app:layout_constraintEnd_toStartOf="@id/unitprice"-->
-<!--        app:layout_constraintStart_toEndOf="@id/name"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/txt2"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="12dp"-->
+    <!--        android:text="@string/prix_unitaire"-->
+    <!--        android:textColor="@color/purple_700"-->
+    <!--        android:textSize="12sp"-->
+    <!--        app:layout_constraintEnd_toStartOf="@id/unitprice"-->
+    <!--        app:layout_constraintStart_toEndOf="@id/name"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/unitprice"
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:gravity="center"
         android:hint="@string/unitprice"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -55,24 +54,24 @@
         app:layout_constraintStart_toEndOf="@id/name"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/txt3"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="12dp"-->
-<!--        android:text="@string/quantit"-->
-<!--        android:textColor="@color/purple_700"-->
-<!--        android:textSize="12sp"-->
-<!--        app:layout_constraintEnd_toStartOf="@id/quantity"-->
-<!--        app:layout_constraintStart_toEndOf="@id/unitprice"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/txt3"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="12dp"-->
+    <!--        android:text="@string/quantit"-->
+    <!--        android:textColor="@color/purple_700"-->
+    <!--        android:textSize="12sp"-->
+    <!--        app:layout_constraintEnd_toStartOf="@id/quantity"-->
+    <!--        app:layout_constraintStart_toEndOf="@id/unitprice"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/quantity"
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:gravity="center"
         android:hint="@string/quantity"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -80,24 +79,24 @@
         app:layout_constraintStart_toEndOf="@id/unitprice"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/txt4"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="12dp"-->
-<!--        android:text="@string/prix_total"-->
-<!--        android:textColor="@color/purple_700"-->
-<!--        android:textSize="12sp"-->
-<!--        app:layout_constraintEnd_toStartOf="@id/totalprice"-->
-<!--        app:layout_constraintStart_toEndOf="@id/quantity"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/txt4"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="12dp"-->
+    <!--        android:text="@string/prix_total"-->
+    <!--        android:textColor="@color/purple_700"-->
+    <!--        android:textSize="12sp"-->
+    <!--        app:layout_constraintEnd_toStartOf="@id/totalprice"-->
+    <!--        app:layout_constraintStart_toEndOf="@id/quantity"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/totalprice"
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:gravity="center"
         android:hint="@string/totalprice"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -109,21 +108,20 @@
         android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/totalprice"
+        android:layout_marginEnd="5dp"
         android:background="?selectableItemBackground"
-        app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/ic_baseline_delete_24"
         app:layout_constraintBottom_toBottomOf="@id/totalprice"
-        app:layout_constraintTop_toTopOf="@id/totalprice"
-        android:layout_marginEnd="5dp"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/totalprice"
+        app:layout_constraintTop_toTopOf="@id/totalprice" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/black"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

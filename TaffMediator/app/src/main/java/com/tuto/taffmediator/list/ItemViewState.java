@@ -8,14 +8,14 @@ public class ItemViewState {
     private String name;
     private String quantity;
     private String total;
-    //private String amount;
 
-    public ItemViewState (String unitPrice, String name, String quantity, String total){
+
+    public ItemViewState(String unitPrice, String name, String quantity, String total) {
         this.unitPrice = unitPrice;
         this.name = name;
         this.quantity = quantity;
         this.total = total;
-        //this.amount = amount;
+
     }
 
     public String getUnitPrice() {
@@ -34,12 +34,13 @@ public class ItemViewState {
         return total;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ItemViewState that = (ItemViewState) o;
-        return unitPrice == that.unitPrice && quantity == that.quantity && total == that.total && name.equals(that.name);
+        return unitPrice.equals(that.unitPrice) && name.equals(that.name) && quantity.equals(that.quantity) && total.equals(that.total);
     }
 
     @Override

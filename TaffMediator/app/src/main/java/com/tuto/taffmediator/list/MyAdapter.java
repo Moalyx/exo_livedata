@@ -23,10 +23,8 @@ public class MyAdapter extends ListAdapter<ItemViewState, MyAdapter.MyViewHolder
     private final OnItemClickedListener listener;
 
 
-
-
-    public MyAdapter(OnItemClickedListener listener){
-        super (new ItemCallback());
+    public MyAdapter(OnItemClickedListener listener) {
+        super(new ItemCallback());
         this.listener = listener;
     }
 
@@ -63,12 +61,12 @@ public class MyAdapter extends ListAdapter<ItemViewState, MyAdapter.MyViewHolder
 
         }
 
-        public void onBind (ItemViewState item, OnItemClickedListener listener){
-            delete.setOnClickListener(view -> listener.onDeleteItemClicked(item.getName()));
-            name.setText(item.getName());
-            unitprice.setText(item.getUnitPrice());
-            quantity.setText(item.getQuantity());
-            totalprice.setText(item.getTotal());
+        public void onBind(ItemViewState itemViewState, OnItemClickedListener listener) {
+            delete.setOnClickListener(view -> listener.onDeleteItemClicked(itemViewState.getName()));
+            name.setText(itemViewState.getName());
+            unitprice.setText(itemViewState.getUnitPrice());
+            quantity.setText(itemViewState.getQuantity());
+            totalprice.setText(itemViewState.getTotal());
 
         }
     }
