@@ -33,8 +33,14 @@ public class TestRepository {
         itemMutableLiveDataList.setValue(items);
     }
 
+<<<<<<< HEAD
     public int onTotalshopping() {
         List<Item> items = itemMutableLiveDataList.getValue();
+=======
+    public LiveData<Integer> onTotalshopping(){
+        // TODO MO Utiliser un Transformations.map ici !
+        List<Item> items = itemMutableLiveDataList;
+>>>>>>> 5ee40ec35741207401476939409abc06ab666a30
         int totshop = 0;
         if (items == null) return 0;
 
