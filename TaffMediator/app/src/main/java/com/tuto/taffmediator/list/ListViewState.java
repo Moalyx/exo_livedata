@@ -41,8 +41,8 @@ public class ListViewState {
     @Override
     public String toString() {
         return "ListViewState{" +
-            "items=" + items +
-            ", total='" + total + '\'' +
-            '}';
+                "items=" + items +
+                ", total='" + total + '\'' +
+                '}';
     }
 }

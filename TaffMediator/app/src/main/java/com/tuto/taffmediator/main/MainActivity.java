@@ -1,18 +1,15 @@
 package com.tuto.taffmediator.main;
 
-import android.app.Activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.tuto.taffmediator.DI.ViewModelFactory;
@@ -21,7 +18,7 @@ import com.tuto.taffmediator.list.ListActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MainViewModel mViewModel; // pour quoi ici je peux pas mettre final alors qu'a la ligne 38 cela est possible?
+    private MainViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,41 +68,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                    Toast.makeText(MainActivity.this, "Vous ne pouvez pas saisir une quantité négative", Toast.LENGTH_SHORT).show();
-                mViewModel.onDecreaseButtonClick();
-
-            }
+        minus.setOnClickListener(view -> {
+            mViewModel.onDecreaseButtonClick();
         });
 
-        plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mViewModel.onIncreaseButtonClick();
-            }
+        plus.setOnClickListener(view -> mViewModel.onIncreaseButtonClick());
+
+        mViewModel.getMessageLiveData().observe(this, mainViewState -> {
+            messageText.setText(mainViewState.getSentence());
+            minus.setEnabled(mainViewState.isMinusButtonEnabled());
         });
 
-        mViewModel.getMessageLiveData().observe(this, new Observer<MainViewState>() {
-            @Override
-            public void onChanged(MainViewState mainViewState) {
-                messageText.setText(mainViewState.getSentence());
-                minus.setEnabled(mainViewState.isMinusButtonEnabled());
-            }
+        addButton.setOnClickListener(view -> {
+            mViewModel.onAddButtonClicked();
+            Intent intent = new Intent(MainActivity.this, ListActivity.class);
+            startActivity(intent);
         });
-
-
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mViewModel.onAddButtonClicked();
-                Intent intent = new Intent(MainActivity.this, ListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
     }
 }

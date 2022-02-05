@@ -4,18 +4,16 @@ import java.util.Objects;
 
 public class ItemViewState {
 
-    private String unitPrice;
-    private String name;
-    private String quantity;
-    private String total;
-
+    private final String unitPrice;
+    private final String name;
+    private final String quantity;
+    private final String total;
 
     public ItemViewState(String unitPrice, String name, String quantity, String total) {
         this.unitPrice = unitPrice;
         this.name = name;
         this.quantity = quantity;
         this.total = total;
-
     }
 
     public String getUnitPrice() {
@@ -33,7 +31,6 @@ public class ItemViewState {
     public String getTotal() {
         return total;
     }
-
 
     @Override
     public boolean equals(Object o) {

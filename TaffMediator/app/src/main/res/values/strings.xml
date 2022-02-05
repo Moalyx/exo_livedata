@@ -11,4 +11,6 @@
     <string name="voici_la_liste_de_vos_courses">Voici la liste de vos courses</string>
     <string name="supprimer">supprimer</string>
     <string name="le_montant_de_votre_panier_est_de">Le montant de votre panier est de :</string>
+    <string name="continuer_les_achats">continuer les achats</string>
+    <string name="montant">montant</string>
 </resources>

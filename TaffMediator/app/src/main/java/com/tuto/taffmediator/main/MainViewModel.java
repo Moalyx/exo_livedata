@@ -22,26 +22,26 @@ public class MainViewModel extends ViewModel {
         this.testRepository = testRepository;
 
         mediatorLiveData.addSource(priceMutableLiveData, price -> combine(
-            price,
-            nameMutableLiveData.getValue(),
-            quantityMutableLiveData.getValue()
+                price,
+                nameMutableLiveData.getValue(),
+                quantityMutableLiveData.getValue()
         ));
         mediatorLiveData.addSource(nameMutableLiveData, name -> combine(
-            priceMutableLiveData.getValue(),
-            name,
-            quantityMutableLiveData.getValue()
+                priceMutableLiveData.getValue(),
+                name,
+                quantityMutableLiveData.getValue()
         ));
         mediatorLiveData.addSource(quantityMutableLiveData, quantity -> combine(
-            priceMutableLiveData.getValue(),
-            nameMutableLiveData.getValue(),
-            quantity
+                priceMutableLiveData.getValue(),
+                nameMutableLiveData.getValue(),
+                quantity
         ));
     }
 
     private void combine(Integer price, String name, Integer quantity) {
         String sentence = "Vous avez acheté la quantité de " + quantity + " " + name
-            + " au prix unitaire de " + price
-            + " pour un prix total de " + quantity * price;
+                + " au prix unitaire de " + price
+                + " pour un prix total de " + quantity * price;
 
         boolean isMinusButtonEnabled = quantity > 0;
 
@@ -50,6 +50,20 @@ public class MainViewModel extends ViewModel {
 
     private void addItemToList(int price, String name, int quantity, int total) {
         testRepository.addItemMutableLiveDateToList(new Item(price, name, quantity, total));
+    }
+
+    public void onAddButtonClicked() {
+        Integer quantity = quantityMutableLiveData.getValue();
+        Integer price = priceMutableLiveData.getValue();
+
+        if (quantity != null && price != null) {
+            addItemToList(
+                    price,
+                    nameMutableLiveData.getValue(),
+                    quantity,
+                    quantity * price
+            );
+        }
     }
 
     public LiveData<MainViewState> getMessageLiveData() {
@@ -94,17 +108,5 @@ public class MainViewModel extends ViewModel {
         }
     }
 
-    public void onAddButtonClicked() {
-        Integer quantity = quantityMutableLiveData.getValue();
-        Integer price = priceMutableLiveData.getValue();
 
-        if (quantity != null && price != null) {
-            addItemToList(
-                price,
-                nameMutableLiveData.getValue(),
-                quantity,
-                quantity * price
-            );
-        }
-    }
 }
