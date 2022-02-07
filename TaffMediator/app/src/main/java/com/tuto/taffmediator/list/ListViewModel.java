@@ -1,6 +1,5 @@
 package com.tuto.taffmediator.list;
 
-import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
@@ -21,22 +20,35 @@ public class ListViewModel extends ViewModel {
     }
 
     public LiveData<ListViewState> getListViewState() {
-        return Transformations.map(testRepository.getViewStateItemLiveData(), input -> {
-            int totshop = 0;
-            for (int i = 0; i < input.size(); i++) {
-                totshop += Integer.parseInt(input.get(i).getTotal());
+        return Transformations.map(testRepository.getItemListLiveData(), items -> {
+            List<ItemViewState> itemViewStates = new ArrayList<>();
+
+            int totalShopping = 0;
+
+            for (int i = 0; i < items.size(); i++) {
+                Item item = items.get(i);
+
+                int total = item.getUnitPrice() * item.getQuantity();
+
+                totalShopping += total;
+
+                itemViewStates.add(
+                    new ItemViewState(
+                        "" + item.getUnitPrice(),
+                        "" + item.getName(),
+                        "" + item.getQuantity(),
+                        "" + total
+                    )
+                );
             }
 
-            ListViewState listViewState = new ListViewState(
-                    input, "" + totshop
-            );
-            return listViewState;
+            return new ListViewState(itemViewStates, "" + totalShopping);
 
         });
     }
 
     public void onDeleteItemClicked(String name) {
-        testRepository.onDeleteItemClicked(name);
+        testRepository.deleteItem(name);
     }
 
 }
