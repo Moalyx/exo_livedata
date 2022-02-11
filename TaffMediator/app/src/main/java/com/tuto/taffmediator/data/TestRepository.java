@@ -1,5 +1,6 @@
 package com.tuto.taffmediator.data;
 
+import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
@@ -36,20 +37,23 @@ public class TestRepository {
     }
 
     public LiveData<List<ItemViewState>> getViewStateItemLiveData() {
-        return Transformations.map(getItemMutableLiveDataList(), items -> {
-            List<ItemViewState> itemsViewState = new ArrayList<>();
-            for (Item item : items) {
-                itemsViewState.add(
-                        new ItemViewState(
-                                "" + item.getUnitPrice(),
-                                "" + item.getName(),
-                                "" + item.getQuantity(),
-                                "" + item.getTotal()
-                        )
-                );
-            }
+        return Transformations.map(getItemMutableLiveDataList(), new Function<List<Item>, List<ItemViewState>>() {
+            @Override
+            public List<ItemViewState> apply(List<Item> items) {
+                List<ItemViewState> itemsViewState = new ArrayList<>();
+                for (Item item : items) {
+                    itemsViewState.add(
+                            new ItemViewState(
+                                    "" + item.getUnitPrice(),
+                                    "" + item.getName(),
+                                    "" + item.getQuantity(),
+                                    "" + item.getTotal()
+                            )
+                    );
+                }
 //
-            return itemsViewState;
+                return itemsViewState;
+            }
         });
     }
 

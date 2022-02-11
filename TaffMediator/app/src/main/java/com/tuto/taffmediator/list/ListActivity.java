@@ -1,6 +1,7 @@
 package com.tuto.taffmediator.list;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,9 +31,12 @@ public class ListActivity extends AppCompatActivity {
 
         final ListViewModel listViewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(ListViewModel.class);
 
-        listViewModel.getListViewState().observe(this, listViewState -> {
-            myAdapter.submitList(listViewState.getItems());
-            montant.setText(listViewState.getTotal());
+        listViewModel.getListViewState().observe(this, new Observer<ListViewState>() {
+            @Override
+            public void onChanged(ListViewState listViewState) {
+                myAdapter.submitList(listViewState.getItems());
+                montant.setText(listViewState.getTotal());
+            }
         });
 
         myAdapter = new MyAdapter(listViewModel::onDeleteItemClicked);

@@ -3,6 +3,7 @@ package com.tuto.taffmediator.main;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.tuto.taffmediator.data.Item;
@@ -21,16 +22,26 @@ public class MainViewModel extends ViewModel {
     public MainViewModel(TestRepository testRepository) {
         this.testRepository = testRepository;
 
-        mediatorLiveData.addSource(priceMutableLiveData, price -> combine(
-                price,
-                nameMutableLiveData.getValue(),
-                quantityMutableLiveData.getValue()
-        ));
-        mediatorLiveData.addSource(nameMutableLiveData, name -> combine(
-                priceMutableLiveData.getValue(),
-                name,
-                quantityMutableLiveData.getValue()
-        ));
+        mediatorLiveData.addSource(priceMutableLiveData, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer price) {
+                MainViewModel.this.combine(
+                        price,
+                        nameMutableLiveData.getValue(),
+                        quantityMutableLiveData.getValue()
+                );
+            }
+        });
+        mediatorLiveData.addSource(nameMutableLiveData, new Observer<String>() {
+            @Override
+            public void onChanged(String name) {
+                MainViewModel.this.combine(
+                        priceMutableLiveData.getValue(),
+                        name,
+                        quantityMutableLiveData.getValue()
+                );
+            }
+        });
         mediatorLiveData.addSource(quantityMutableLiveData, quantity -> combine(
                 priceMutableLiveData.getValue(),
                 nameMutableLiveData.getValue(),

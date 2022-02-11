@@ -62,7 +62,12 @@ public class MyAdapter extends ListAdapter<ItemViewState, MyAdapter.MyViewHolder
         }
 
         public void onBind(ItemViewState itemViewState, OnItemClickedListener listener) {
-            delete.setOnClickListener(view -> listener.onDeleteItemClicked(itemViewState.getName()));
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onDeleteItemClicked(itemViewState.getName());
+                }
+            });
             name.setText(itemViewState.getName());
             unitprice.setText(itemViewState.getUnitPrice());
             quantity.setText(itemViewState.getQuantity());
