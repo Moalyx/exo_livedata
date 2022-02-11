@@ -35,7 +35,6 @@ public class TestRepository {
         }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
     public LiveData<List<ItemViewState>> getViewStateItemLiveData() {
         return Transformations.map(getItemMutableLiveDataList(), new Function<List<Item>, List<ItemViewState>>() {
             @Override
@@ -55,9 +54,6 @@ public class TestRepository {
                 return itemsViewState;
             }
         });
-=======
-        itemMutableLiveDataList.setValue(items);
->>>>>>> 93e10fbc1a0ce684268ed5f58a91a66fe1ea1ea1
 =======
         itemMutableLiveDataList.setValue(items);
 >>>>>>> 93e10fbc1a0ce684268ed5f58a91a66fe1ea1ea1

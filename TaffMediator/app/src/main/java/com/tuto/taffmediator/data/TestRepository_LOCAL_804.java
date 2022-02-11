@@ -8,7 +8,6 @@ import androidx.lifecycle.Transformations;
 import com.tuto.taffmediator.list.ItemViewState;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class TestRepository {
@@ -16,26 +15,27 @@ public class TestRepository {
     private final MutableLiveData<List<Item>> itemMutableLiveDataList = new MutableLiveData<>();
     private final List<Item> items = new ArrayList<>();
 
-    public LiveData<List<Item>> getItemListLiveData() {
+    public LiveData<List<Item>> getItemMutableLiveDataList() {
         return itemMutableLiveDataList;
     }
 
-    public void addItem(Item item) {
+    public void addItemMutableLiveDateToList(Item item) {
         items.add(item);
         itemMutableLiveDataList.setValue(items);
     }
 
-    public void deleteItem(String name) {
-        for (Iterator<Item> iterator = items.iterator(); iterator.hasNext(); ) {
-            Item item = iterator.next();
+    public void onDeleteItemClicked(String name) {
+        List<Item> items = itemMutableLiveDataList.getValue();
+        if (items == null) return;
 
-            if (item.getName().equals(name)) {
-                iterator.remove();
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getName().equals(name)) {
+                items.remove(items.get(i));
             }
         }
+        itemMutableLiveDataList.setValue(items);
+    }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     public LiveData<List<ItemViewState>> getViewStateItemLiveData() {
         return Transformations.map(getItemMutableLiveDataList(), new Function<List<Item>, List<ItemViewState>>() {
             @Override
@@ -55,11 +55,19 @@ public class TestRepository {
                 return itemsViewState;
             }
         });
-=======
-        itemMutableLiveDataList.setValue(items);
->>>>>>> 93e10fbc1a0ce684268ed5f58a91a66fe1ea1ea1
-=======
-        itemMutableLiveDataList.setValue(items);
->>>>>>> 93e10fbc1a0ce684268ed5f58a91a66fe1ea1ea1
     }
+
+//        public LiveData<Integer> onTotalshopping () {
+//            // TODO MO Utiliser un Transformations.map ici !
+//            return Transformations.map(itemMutableLiveDataList, new Function<List<Item>, Integer>() {
+//                @Override
+//                public Integer apply(List<Item> items) {
+//                    Integer totshop =0;
+//
+//                    for (int i = 0; i < items.size(); i++){
+//                        totshop += items.get(i).getTotal();
+//                    } return totshop;
+//                }
+//            });
+//    }
 }
