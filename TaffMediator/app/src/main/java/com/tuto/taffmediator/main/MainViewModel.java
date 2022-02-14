@@ -60,7 +60,7 @@ public class MainViewModel extends ViewModel {
     }
 
     private void addItemToList(int price, String name, int quantity, int total) {
-        testRepository.addItem(new Item(price, name, quantity, total));
+        testRepository.addItem(new Item(price, name, quantity));
     }
 
     public void onAddButtonClicked() {

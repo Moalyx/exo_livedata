@@ -1,11 +1,8 @@
 package com.tuto.taffmediator.data;
 
-import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Transformations;
 
-import com.tuto.taffmediator.list.ItemViewState;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -33,33 +30,6 @@ public class TestRepository {
                 iterator.remove();
             }
         }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public LiveData<List<ItemViewState>> getViewStateItemLiveData() {
-        return Transformations.map(getItemMutableLiveDataList(), new Function<List<Item>, List<ItemViewState>>() {
-            @Override
-            public List<ItemViewState> apply(List<Item> items) {
-                List<ItemViewState> itemsViewState = new ArrayList<>();
-                for (Item item : items) {
-                    itemsViewState.add(
-                            new ItemViewState(
-                                    "" + item.getUnitPrice(),
-                                    "" + item.getName(),
-                                    "" + item.getQuantity(),
-                                    "" + item.getTotal()
-                            )
-                    );
-                }
-//
-                return itemsViewState;
-            }
-        });
-=======
         itemMutableLiveDataList.setValue(items);
->>>>>>> 93e10fbc1a0ce684268ed5f58a91a66fe1ea1ea1
-=======
-        itemMutableLiveDataList.setValue(items);
->>>>>>> 93e10fbc1a0ce684268ed5f58a91a66fe1ea1ea1
     }
 }

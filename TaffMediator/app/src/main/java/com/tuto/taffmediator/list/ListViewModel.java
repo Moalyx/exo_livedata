@@ -1,5 +1,6 @@
 package com.tuto.taffmediator.list;
 
+import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
@@ -20,30 +21,33 @@ public class ListViewModel extends ViewModel {
     }
 
     public LiveData<ListViewState> getListViewState() {
-        return Transformations.map(testRepository.getItemListLiveData(), items -> {
-            List<ItemViewState> itemViewStates = new ArrayList<>();
+        return Transformations.map(testRepository.getItemListLiveData(), new Function<List<Item>, ListViewState>() {
+            @Override
+            public ListViewState apply(List<Item> items) {
+                List<ItemViewState> itemViewStates = new ArrayList<>();
 
-            int totalShopping = 0;
+                int totalShopping = 0;
 
-            for (int i = 0; i < items.size(); i++) {
-                Item item = items.get(i);
+                for (int i = 0; i < items.size(); i++) {
+                    Item item = items.get(i);
 
-                int total = item.getUnitPrice() * item.getQuantity();
+                    int total = item.getUnitPrice() * item.getQuantity();
 
-                totalShopping += total;
+                    totalShopping += total;
 
-                itemViewStates.add(
-                    new ItemViewState(
-                        "" + item.getUnitPrice(),
-                        "" + item.getName(),
-                        "" + item.getQuantity(),
-                        "" + total
-                    )
-                );
+                    itemViewStates.add(
+                            new ItemViewState(
+                                    "" + item.getUnitPrice(),
+                                    "" + item.getName(),
+                                    "" + item.getQuantity(),
+                                    "" + total
+                            )
+                    );
+                }
+
+                return new ListViewState(itemViewStates, "" + totalShopping);
+
             }
-
-            return new ListViewState(itemViewStates, "" + totalShopping);
-
         });
     }
 
