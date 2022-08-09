@@ -39,7 +39,12 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-        myAdapter = new MyAdapter(listViewModel::onDeleteItemClicked);
+        myAdapter = new MyAdapter(new OnItemClickedListener() {
+            @Override
+            public void onDeleteItemClicked(String name) {
+                listViewModel.onDeleteItemClicked(name);
+            }
+        });
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
